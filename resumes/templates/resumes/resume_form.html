@@ -1,0 +1,455 @@
+{% extends 'resumes/base.html' %}
+
+{% block title %}{{ title }} - Resume Builder{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <!-- Progress Indicator -->
+            <div class="mb-4">
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+                </div>
+                <div class="text-center mt-2">
+                    <small class="text-muted">Complete your resume information</small>
+                </div>
+            </div>
+
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white py-4">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-white bg-opacity-25 p-3 me-3">
+                            <i class="fas fa-user-edit fa-2x text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="card-title mb-1">{{ title }}</h2>
+                            <p class="mb-0 opacity-75">Fill in your details to create a professional resume</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        <!-- Personal Information Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-user me-2"></i>Personal Information
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.full_name }}
+                                        <label for="{{ form.full_name.id_for_label }}">
+                                            <i class="fas fa-signature me-1"></i>Full Name *
+                                        </label>
+                                    </div>
+                                    {% if form.full_name.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.full_name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.email }}
+                                        <label for="{{ form.email.id_for_label }}">
+                                            <i class="fas fa-envelope me-1"></i>Email Address *
+                                        </label>
+                                    </div>
+                                    {% if form.email.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.email.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.phone }}
+                                        <label for="{{ form.phone.id_for_label }}">
+                                            <i class="fas fa-phone me-1"></i>Phone Number
+                                        </label>
+                                    </div>
+                                    {% if form.phone.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.phone.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.address }}
+                                        <label for="{{ form.address.id_for_label }}">
+                                            <i class="fas fa-map-marker-alt me-1"></i>Address
+                                        </label>
+                                    </div>
+                                    {% if form.address.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.address.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Online Presence Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-globe me-2"></i>Online Presence
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        {{ form.linkedin }}
+                                        <label for="{{ form.linkedin.id_for_label }}">
+                                            <i class="fab fa-linkedin me-1"></i>LinkedIn Profile
+                                        </label>
+                                    </div>
+                                    {% if form.linkedin.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.linkedin.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        {{ form.github }}
+                                        <label for="{{ form.github.id_for_label }}">
+                                            <i class="fab fa-github me-1"></i>GitHub Profile
+                                        </label>
+                                    </div>
+                                    {% if form.github.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.github.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        {{ form.portfolio }}
+                                        <label for="{{ form.portfolio.id_for_label }}">
+                                            <i class="fas fa-briefcase me-1"></i>Portfolio Website
+                                        </label>
+                                    </div>
+                                    {% if form.portfolio.errors %}
+                                        <div class="text-danger mt-1">
+                                            <i class="fas fa-exclamation-circle me-1"></i>{{ form.portfolio.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Summary Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>Professional Summary
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.summary }}
+                                <label for="{{ form.summary.id_for_label }}">
+                                    <i class="fas fa-pen me-1"></i>Write a compelling summary of your professional background
+                                </label>
+                            </div>
+                            {% if form.summary.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.summary.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Highlight your key strengths, experience, and career goals in 3-5 sentences.
+                            </div>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-tools me-2"></i>Skills & Technologies
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.skills }}
+                                <label for="{{ form.skills.id_for_label }}">
+                                    <i class="fas fa-code me-1"></i>List your technical and soft skills
+                                </label>
+                            </div>
+                            {% if form.skills.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.skills.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Include programming languages, frameworks, tools, and soft skills like communication, leadership, etc.
+                            </div>
+                        </div>
+
+                        <!-- Languages Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-language me-2"></i>Languages
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.languages }}
+                                <label for="{{ form.languages.id_for_label }}">
+                                    <i class="fas fa-comments me-1"></i>Languages you speak
+                                </label>
+                            </div>
+                            {% if form.languages.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.languages.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Specify proficiency levels (e.g., Native, Fluent, Intermediate, Basic).
+                            </div>
+                        </div>
+
+                        <!-- Work Experience Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-briefcase me-2"></i>Work Experience
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.experience }}
+                                <label for="{{ form.experience.id_for_label }}">
+                                    <i class="fas fa-building me-1"></i>Detail your professional experience
+                                </label>
+                            </div>
+                            {% if form.experience.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.experience.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Use reverse chronological order. Include company, position, dates, and key achievements/responsibilities.
+                            </div>
+                        </div>
+
+                        <!-- Education Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-graduation-cap me-2"></i>Education
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.education }}
+                                <label for="{{ form.education.id_for_label }}">
+                                    <i class="fas fa-university me-1"></i>List your educational background
+                                </label>
+                            </div>
+                            {% if form.education.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.education.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Include degrees, institutions, graduation dates, and relevant coursework or honors.
+                            </div>
+                        </div>
+
+                        <!-- Certifications Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-certificate me-2"></i>Certifications
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.certifications }}
+                                <label for="{{ form.certifications.id_for_label }}">
+                                    <i class="fas fa-award me-1"></i>Professional certifications
+                                </label>
+                            </div>
+                            {% if form.certifications.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.certifications.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Include certification names, issuing organizations, and dates obtained.
+                            </div>
+                        </div>
+
+                        <!-- Projects Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-project-diagram me-2"></i>Projects & Achievements
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.projects }}
+                                <label for="{{ form.projects.id_for_label }}">
+                                    <i class="fas fa-tasks me-1"></i>Notable projects and achievements
+                                </label>
+                            </div>
+                            {% if form.projects.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.projects.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Highlight significant projects, technologies used, and your specific contributions.
+                            </div>
+                        </div>
+
+                        <!-- Interests Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-heart me-2"></i>Interests & Hobbies
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.interests }}
+                                <label for="{{ form.interests.id_for_label }}">
+                                    <i class="fas fa-palette me-1"></i>Personal interests and hobbies
+                                </label>
+                            </div>
+                            {% if form.interests.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.interests.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Share interests that showcase your personality and additional skills.
+                            </div>
+                        </div>
+
+                        <!-- References Section -->
+                        <div class="mb-5">
+                            <div class="section-header mb-4">
+                                <h4 class="text-primary mb-3">
+                                    <i class="fas fa-users me-2"></i>Professional References
+                                </h4>
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="form-floating">
+                                {{ form.references }}
+                                <label for="{{ form.references.id_for_label }}">
+                                    <i class="fas fa-address-book me-1"></i>Professional references
+                                </label>
+                            </div>
+                            {% if form.references.errors %}
+                                <div class="text-danger mt-1">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ form.references.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Tip: Include 2-3 professional references with their contact information and relationship to you.
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-between align-items-center pt-4 border-top">
+                            <a href="{% url 'resume_list' %}" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Resumes
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                <i class="fas fa-save me-2"></i>{{ title }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="card mt-4 border-info">
+                <div class="card-body">
+                    <h6 class="card-title text-info">
+                        <i class="fas fa-question-circle me-2"></i>Need Help?
+                    </h6>
+                    <p class="card-text mb-0">
+                        Fill out each section carefully. Your resume will be automatically formatted into a professional PDF.
+                        Make sure all required fields (*) are completed before saving.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.section-header h4 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-floating > label {
+    font-weight: 500;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+</style>
+{% endblock %}

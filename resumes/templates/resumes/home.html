@@ -1,0 +1,81 @@
+{% extends 'resumes/base.html' %}
+
+{% block title %}Home - Resume Builder{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 class="hero-title">Resume Builder</h1>
+                <p class="hero-subtitle">Create professional resumes in minutes with our easy-to-use platform. Stand out from the crowd with beautifully designed templates.</p>
+
+                {% if not user.is_authenticated %}
+                    <div class="mb-4">
+                        <a href="{% url 'signup' %}" class="btn btn-light btn-lg me-3">Get Started</a>
+                        <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">Login</a>
+                    </div>
+                {% else %}
+                    <div class="mb-4">
+                        <a href="{% url 'resume_create' %}" class="btn btn-success btn-lg me-3">Create New Resume</a>
+                        <a href="{% url 'resume_list' %}" class="btn btn-outline-light btn-lg">View My Resumes</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h5>Easy to Use</h5>
+                <p>Simple interface to create professional resumes in minutes.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h5>PDF Export</h5>
+                <p>Download your resume as a PDF file ready for job applications.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h5>Secure</h5>
+                <p>Your data is safe and private. Only you can access your resumes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="stats-card">
+                <!-- <div class="stats-number">1</div> -->
+                <h6>Professional Template</h6>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stats-card">
+                <div class="stats-number">PDF</div>
+                <h6>Export Format</h6>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stats-card">
+                <div class="stats-number">24/7</div>
+                <h6>Support Available</h6>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
